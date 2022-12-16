@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class HomePage {
@@ -26,6 +28,7 @@ public class HomePage {
     public void openPage(){
         driver.get("https://us.puma.com/us/en");
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.of(5, ChronoUnit.SECONDS));
     }
 
     public void search(String searchText){
@@ -36,19 +39,14 @@ public class HomePage {
 
     public void printAllItemInfo(){
         List<WebElement> elementsList = driver.findElements(elements);
-        LOGGER.info(elementsList.toString());
+        LOGGER.info("size = "+elementsList.size());
         for (WebElement webElement : elementsList) {
             LOGGER.info(webElement.getText());
         }
     }
 
-    public void close(){
+    public void close() {
         driver.close();
     }
-
-
-
-
-
 
 }
